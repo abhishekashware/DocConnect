@@ -65,7 +65,7 @@ const userLogin = asyncHandler(async (req, res) => {
 // individual user
 const individualUser = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findById(req.param.id).select("-password");
+    const user = await User.findById(req.params.id).select("-password");
     res.status(200).json(user);
   } catch (error) {
     res.status(400);
@@ -76,10 +76,10 @@ const individualUser = asyncHandler(async (req, res) => {
 // update user
 const updateUser = asyncHandler(async (req, res) => {
   try {
-    const hospital = await Hospitals.findByIdAndUpdate(req.params.id, {
+    const userData = await User.findByIdAndUpdate(req.params.id, {
       $set: req.body,
-    });
-    res.status(200).json(hospital);
+    },{new: true});
+    res.status(200).json(userData);
   } catch (error) {
     res.status(400);
     throw new Error(error);

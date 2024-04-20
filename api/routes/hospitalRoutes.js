@@ -22,7 +22,6 @@ route.post("/registerHospital", registerHospital);
 route.post("/loginHospital", loginHospital);
 route.get("/allHospital", allHospitals);
 route.get("/:id", individualHospital);
-route.put("/:id/hospitalProfile", upateHospital);
 route.put("/:id/updateHospital", upateHospital);
 route.post("/:id/services/addservice", addService);
 route.post("/:id/events/addEvents", addEvents);

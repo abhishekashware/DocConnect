@@ -2,6 +2,10 @@ import axios from 'axios'
 import {
   USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL,
   USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_LOGOUT,
+  USER_UPDATE_PROFILE,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstants'
 
 export const userLoginAction = (email, password) => async (dispatch, getState) => {
@@ -55,4 +59,49 @@ export const userRegisterAction = (name, email, dob, contacts, password) => asyn
     });
     throw new Error(err);
   }
+}
+
+
+export const userUpdateProfileAction=(id,name,email,dob,phoneNo)=>async(dispatch)=>{
+  try{
+    dispatch({
+      type:USER_UPDATE_PROFILE_REQUEST
+    })
+    const {data}=await axios.post(`http://localhost:5000/api/user/updateprofile/${id}`,
+      {
+        name,email,dob,contacts:phoneNo
+      }
+    )
+    dispatch({
+      type:USER_UPDATE_PROFILE_SUCCESS,
+      payload:data
+    })
+  }catch(err){
+    dispatch({
+      type:USER_UPDATE_PROFILE_FAIL,
+      payload:err
+    })
+    console.log(err);
+  }
+
+}
+
+export const fetchUserProfileAction=(id)=>async(dispatch)=>{
+  try{
+    dispatch({
+      type:USER_UPDATE_PROFILE_REQUEST
+    })
+    const {data}=await axios.get(`http://localhost:5000/api/user/${id}`)
+    dispatch({
+      type:USER_UPDATE_PROFILE_SUCCESS,
+      payload:data
+    })
+  }catch(err){
+    dispatch({
+      type:USER_UPDATE_PROFILE_FAIL,
+      payload:err
+    })
+    console.log(err);
+  }
+
 }

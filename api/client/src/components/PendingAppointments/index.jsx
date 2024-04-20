@@ -78,18 +78,18 @@ const PendingAppointments = () => {
     }, []);
 
     const columns = useMemo(() => COLUMNS, [])
-    const data = useMemo(() => {
+    // const data = useMemo(() => {
         
-        const getTableDatas = async () => {
-            const { data } = await axios.get(
-              `http://localhost:5000/userAppointment/allAppointments`
-            );
-            return data;
-        }
+    //     const getTableDatas = async () => {
+    //         const { data } = await axios.get(
+    //           `http://localhost:5000/userAppointment/allAppointments`
+    //         );
+    //         return data;
+    //     }
 
-        getTableDatas();
+    //     getTableDatas();
 
-    }, [])
+    // }, [])
 
     return (
         <Container>
@@ -111,61 +111,6 @@ const PendingAppointments = () => {
                         <th className="text-left py-3 px-1 border-2 ">Token No</th>
                     </tr>
                     {/* rows of data are below now */}
-                    <tr
-                        className="border-b hover:bg-orange-100 bg-gray-100"
-                        style={{ fontSize: "13px" }}
-                    >
-                        <td className="p-2 px-2 border-2">
-                            <span>01.</span>
-                        </td>
-                        <td className="p-2 px-2 border-2">
-                            <span>Madan Bahadur</span>
-                        </td>
-                        <td className="p-2 px-2 border-2">
-                            <span>9867134457</span>
-                        </td>
-                        <td className="p-2 px-2 border-2">
-                            <span>Blood Test</span>
-                        </td>
-                        <td className="p-2 px-2 border-2">
-                            <AppointmentDetailsButton />
-                        </td>
-                        <td className="p-2 px-2 border-2">
-                            <select className="bg-transparent" ref={asignDoc}>
-                                <option>None</option>
-                                <option>Dr.Sanduik Ruit</option>
-                                <option>Dr.Pathak</option>
-                                <option>Dr.Achaya</option>
-                            </select>
-                        </td>
-                        <td className="p-2 px-2 border-2">
-                            <input type="date" ref={asignDate} />
-                        </td>
-                        <td className="p-2 px-2 border-2">
-                            <input type="time" ref={asignTime} />
-                        </td>
-                        <td className="p-2 border-2">
-                            <input
-                                type="text"
-                                style={{ width: "100px" }}
-                                placeholder="token.no"
-                            />
-                        </td>
-                        <td className="p-3 px-5 flex justify-end">
-                            <button
-                                type="button"
-                                className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                            >
-                                Approve
-                            </button>
-                            <button
-                                type="button"
-                                className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                            >
-                                Reject
-                            </button>
-                        </td>
-                    </tr>
                     {datas &&
                         datas.map(
                             (res, key) =>

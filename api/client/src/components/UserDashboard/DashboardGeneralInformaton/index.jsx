@@ -5,7 +5,9 @@ import EditProfileForm from 'components/UserDashboard/EditProfileForm'
 import EditButton from 'assets/images/edit.svg'
 import { fonts } from 'fonts';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserProfileAction } from "actions/userActions";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 
 
@@ -69,21 +71,19 @@ const CardBodyLeft = styled.div``
 const Index = () => {
 
     const [open, setOpen] = useState(false);
-    const userLogin = useSelector(state => state.userLogin)
-    const userInfo = {
-        name: "Rupak Thapa Magar",
-        email: "aa@aa.com",
-        _id: "12sdsdWX22",
-        dob: "2056-04-19",
-        contacts: "9811335594"
+    const userData = useSelector(state => state.userData)
+    const params=useParams();
+    const dispatch=useDispatch();
+
+    const fetchData=async ()=>{    
+    console.log("data",userData);
+    await dispatch(fetchUserProfileAction(params.id))
     }
-
-
     useEffect(() => {
-        console.log(open)
-    }, [open])
+        fetchData()
+    }, [])
 
-    const { _id, name, email, dob, contacts } = userLogin.userInfo;
+    const info = userData.userInfo;
     return (
         <Card>
             <CardHeader>
@@ -104,7 +104,7 @@ const Index = () => {
                             User ID
                         </CardBodyTitle>
                         <CardBodyDescription>
-                            {_id}
+                            {info?._id}
                         </CardBodyDescription>
                     </CardItem>
                     <CardItem>
@@ -112,7 +112,7 @@ const Index = () => {
                             Name
                         </CardBodyTitle>
                         <CardBodyDescription>
-                            {name}
+                            {info?.name}
                         </CardBodyDescription>
                     </CardItem>
                     <CardItem>
@@ -120,7 +120,7 @@ const Index = () => {
                             Email
                         </CardBodyTitle>
                         <CardBodyDescription>
-                            {email}
+                            {info?.email}
                         </CardBodyDescription>
                     </CardItem>
                 </CardBodyLeft>
@@ -130,7 +130,7 @@ const Index = () => {
                             Date Of Birth
                         </CardBodyTitle>
                         <CardBodyDescription>
-                            {dob}
+                            {info?.dob}
                         </CardBodyDescription>
                     </CardItem>
                     <CardItem>
@@ -138,7 +138,7 @@ const Index = () => {
                             Primary Number
                         </CardBodyTitle>
                         <CardBodyDescription>
-                            {contacts}
+                            {info?.contacts}
                         </CardBodyDescription>
                     </CardItem>
                 </CardBodyRight>

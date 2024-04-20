@@ -3,6 +3,7 @@ const {
   userRegister,
   userLogin,
   individualUser,
+  updateUser,
 } = require("../controllers/userControllers");
 
 
@@ -12,7 +13,9 @@ route.post("/register", userRegister);
 // user login
 route.post("/login", userLogin);
 
-// // get user by id
-// route.get("/:id/user", individualUser);
+ // get user by id
+ route.get("/:id", individualUser);
+
+route.post("/updateprofile/:id",updateUser)
 
 module.exports = route;

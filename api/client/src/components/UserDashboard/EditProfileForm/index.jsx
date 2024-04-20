@@ -6,6 +6,8 @@ import styled from "styled-components/dist/styled-components.js"
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { userUpdateProfileAction } from 'actions/userActions';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const ModalTitle = styled.div`
@@ -31,7 +33,7 @@ const Error = styled.div`
 const EditProfile = ({ open, setOpen }) => {
 
 
-
+    const params=useParams();
     const [userDescription, setuserDescription] = useState("")
 
     const dispatch = useDispatch()
@@ -54,8 +56,13 @@ const EditProfile = ({ open, setOpen }) => {
 
 
     const onSubmit = async (data) => {
-        console.log(data);
-        //await dispatch(updateuserDescription(id, userDescription))
+        const {name,email,dob,contactNumber}=data;
+        await dispatch(userUpdateProfileAction(params.id,name,email,dob,contactNumber))
+        if(userLogin.error){
+            alert("error occurred")
+        }else{
+            setOpen(false)
+        }
     }
 
     return (

@@ -45,7 +45,7 @@ const Navbar = () => {
             <NavSection>
                 <NavLeft>
                     <Link to="/">
-                        <img src={Logo} alt={"Doctor Sahab Logo"} />
+                        <img src={Logo}  style={{height:'80px',color:'black'}}  alt={"Doctor Sahab Logo"} />
                     </Link>
                 </NavLeft>
                 <NavRight>

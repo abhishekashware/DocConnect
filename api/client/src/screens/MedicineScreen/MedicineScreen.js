@@ -62,7 +62,7 @@ const MedicineScreen = ({history}) => {
         <>
             <Container>
                 <Nav>
-                    <Link to="/"><img src={Logo} alt="logo" /></Link>
+                    <Link to="/"><img src={Logo} alt="logo"  style={{width:'20px'}}  /></Link>
                     <Link to="/cart"><Button>Cart</Button></Link>
                 </Nav>
                 <Body>

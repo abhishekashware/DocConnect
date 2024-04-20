@@ -81,18 +81,18 @@ function Navbar({ type }) {
   const hospitalLogin = useSelector((state) => {
     return state.hospitalLogin;
   });
-  const userLogin = useSelector((state) => {
-    return state.userLogin;
+  const userData = useSelector((state) => {
+    return state.userData;
   })
 
   const params = useParams();
   console.log({params})
   
   const returnValidObject = (id) => {
-    if (id === userLogin.userInfo._id) {
-      return { ...userLogin.userInfo }
+    if (userData.userInfo && (id === userData.userInfo._id)) {
+      return { ...userData.userInfo }
     }
-    if (id === hospitalLogin.hospitalInfo._id) {
+    if (  hospitalLogin.hospitalInfo && (id === hospitalLogin.hospitalInfo._id)) {
       return { ...hospitalLogin.hospitalInfo }
     }
   }
@@ -104,8 +104,8 @@ function Navbar({ type }) {
       <NavInner>
         <FlexContainer>
           <FlexLeft>
-            <StyledLink to={type === "hospital" ? `/${responseObject._id}/hospitalDashboard/` : `/${responseObject._id}/userDashboard/`}>
-              <img src={Logo} alt={"Logo "} />
+            <StyledLink to={type === "hospital" ? `/${responseObject?._id}/hospitalDashboard/` : `/${responseObject?._id}/userDashboard/`}>
+              <img src={Logo} style={{height:'20px',width:'20px'}} alt={"Logo "} />
             </StyledLink>
           </FlexLeft>
           <FlexRight>
