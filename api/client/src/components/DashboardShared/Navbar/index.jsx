@@ -105,7 +105,7 @@ function Navbar({ type }) {
         <FlexContainer>
           <FlexLeft>
             <StyledLink to={type === "hospital" ? `/${responseObject?._id}/hospitalDashboard/` : `/${responseObject?._id}/userDashboard/`}>
-              <img src={Logo} style={{height:'20px',width:'20px'}} alt={"Logo "} />
+              <img src={Logo}   style={{height:'80px'}} alt={"Logo "} />
             </StyledLink>
           </FlexLeft>
           <FlexRight>
