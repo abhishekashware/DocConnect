@@ -1,5 +1,5 @@
 # Hospital-Management-System-MERN
-Hospital Management System with MERN stack. A project for Hackathon.Where i did more on backend also some frontend components and project management task scheduling and assigining to every team mates. 
+Hospital Management System with MERN stack.
 
 ## Watch Demo: (https://www.youtube.com/watch?v=WP749Qv4AmI&t=1s)
 
@@ -9,7 +9,6 @@ Hospital Management System with MERN stack. A project for Hackathon.Where i did 
         "adding updating staffs,bed no,icu beds,vaccancy,etc.",
         "rating hospitals",
         "simple e-commerce for medicine--unfinished",
-        "noifiactions to the unique user",
-        "applying for appointmenet",
-        "assigning doctors to the each patient",
-        "providing tokenid to user"
+        "noifications to the unique user",
+        "applying for appointment",
+        "assigning doctors to each patient"
