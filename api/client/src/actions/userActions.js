@@ -11,7 +11,7 @@ import {
 export const userLoginAction = (email, password) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST })
-    const { data } = await axios.post('http://localhost:5000/api/user/login', { email, password })
+    const { data } = await axios.post('/api/user/login', { email, password })
     console.log(data)
 
     dispatch({
@@ -40,7 +40,7 @@ export const userRegisterAction = (name, email, dob, contacts, password) => asyn
       type: USER_REGISTER_REQUEST,
     });
 
-    const { data } = await axios.post("http://localhost:5000/api/user/register", { name, email, password, dob, contacts });
+    const { data } = await axios.post("/api/user/register", { name, email, password, dob, contacts });
     console.log(data)
     dispatch({
       type: USER_REGISTER_SUCCESS,
@@ -67,7 +67,7 @@ export const userUpdateProfileAction=(id,name,email,dob,phoneNo)=>async(dispatch
     dispatch({
       type:USER_UPDATE_PROFILE_REQUEST
     })
-    const {data}=await axios.post(`http://localhost:5000/api/user/updateprofile/${id}`,
+    const {data}=await axios.post(`/api/user/updateprofile/${id}`,
       {
         name,email,dob,contacts:phoneNo
       }
@@ -91,7 +91,7 @@ export const fetchUserProfileAction=(id)=>async(dispatch)=>{
     dispatch({
       type:USER_UPDATE_PROFILE_REQUEST
     })
-    const {data}=await axios.get(`http://localhost:5000/api/user/${id}`)
+    const {data}=await axios.get(`/api/user/${id}`)
     dispatch({
       type:USER_UPDATE_PROFILE_SUCCESS,
       payload:data

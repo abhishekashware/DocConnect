@@ -53,9 +53,6 @@ app.use(express.urlencoded({ extended: false }));
 //   }
 // });
 
-const publicVapidKey =
-  "BNMkYgI5rG1OR8cZNo9yZEXfdlcIlY7egBEwpUyoDXWhT0hraIwQbuzCHlo7rqwaAHgJtXvaVs8tjhw8_8wpQ_w";
-const privateVapidKey = "_GiZvcjF-FSmPULiqCxaPZcdalmVnClT69aX2lX0Vko";
 
 app.use("/api/hospitals", hospitalRoutes);
 app.use("/api/user", userRoutes);
@@ -63,6 +60,14 @@ app.use("/api/userAppointment", appointmentRoutes);
 app.use("/api/reports", userReports);
 app.use("/api/doctor", doctorRoutes);
 app.use("/api/medic", medicRoutes);
+
+
+app.use(express.static(path.join(__dirname, 'api/client/build')));
+
+app.get('*',(req,res)=>{
+  res.sendFile(path.join(__dirname,'api/client/build'))
+})
+
 //database
 connectDb();
 
