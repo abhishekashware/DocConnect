@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store";
-import * as serviceWorker from "./serviceWorker";
+// import * as serviceWorker from "./serviceWorker";
 ReactDOM.render(
   <Provider store={store}>
     <App />
@@ -14,4 +14,4 @@ ReactDOM.render(
 );
 reportWebVitals();
 
-serviceWorker.register();
+// serviceWorker.register();
