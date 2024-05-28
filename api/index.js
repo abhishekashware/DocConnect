@@ -8,7 +8,6 @@ const multer = require("multer");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const webpush = require("web-push");
-const bodyParser = require("body-parser");
 const app = express();
 
 const { notFound, errorHandler } = require("./middleware/errorHandlers");
@@ -25,7 +24,6 @@ const medicRoutes = require("./routes/medicRoutes");
 dotenv.config();
 
 //middlewares
-app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 app.use(helmet());
@@ -62,10 +60,10 @@ app.use("/api/doctor", doctorRoutes);
 app.use("/api/medic", medicRoutes);
 
 
-app.use(express.static(path.join(__dirname, 'api/client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('*',(req,res)=>{
-  res.sendFile(path.join(__dirname,'api/client/build'))
+  res.sendFile(path.join(__dirname,'client/build'))
 })
 
 //database
@@ -74,6 +72,6 @@ connectDb();
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("SERVER UP AND RUNNING".bold.cyan);
 });
