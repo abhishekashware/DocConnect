@@ -60,17 +60,17 @@ function Userdashboard() {
 
   // let externalId = userId;
 
-  OneSignal.push(function () {
-    OneSignal.isPushNotificationsEnabled(function (isEnabled) {
-      if (isEnabled) {
-        console.log("Push notifications are enabled!");
-        OneSignal.setExternalUserId(userId);
-        console.log(OneSignal.getUserId());
-      } else {
-        console.log("Push notifications are not enabled yet.");
-      }
-    });
-  });
+  // OneSignal.push(function () {
+  //   OneSignal.isPushNotificationsEnabled(function (isEnabled) {
+  //     if (isEnabled) {
+  //       console.log("Push notifications are enabled!");
+  //       OneSignal.setExternalUserId(userId);
+  //       console.log(OneSignal.getUserId());
+  //     } else {
+  //       console.log("Push notifications are not enabled yet.");
+  //     }
+  //   });
+  // });
   return (
     <DashboardLayout type={"hospital"} menuData={userMenuData}>
       <Wrapper>

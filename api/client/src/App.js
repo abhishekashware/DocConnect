@@ -51,7 +51,7 @@ function App() {
         <Route exact path="/doctor_register" component={DoctorRegister} />
         <Route exact path="/login_options" component={LoginOptions} />
         <Route exact path="/covid19" component={CovidScreen} />
-        <Route exact path="/doctorsahab/medicines" component={MedicineScreen} />
+        <Route exact path="/medicines" component={MedicineScreen} />
         <Route exact path="/cart/:id?" component={CartScreen} />
         <ProtectedRoute
           exact

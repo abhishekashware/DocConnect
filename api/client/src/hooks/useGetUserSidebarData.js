@@ -19,49 +19,62 @@ const useGetUserData = () => {
                 id: 1,
                 route: `/${userId}/userDashboard/`,
                 title: "Dashboard",
-                icon: Home
+                icon: Home,
+                isDisabled:false
             },
             {
                 id: 2,
                 route: `/${userId}/userDashboard/appointments/`,
                 title: "Appointments",
-                icon: Appointments
+                icon: Appointments,
+                isDisabled:false
+
             },
             {
                 id: 3,
                 route: `/${userId}/userDashboard/hospitals/`,
                 title: "Hospital",
-                icon: Hospital
+                icon: Hospital,
+                isDisabled:false
+
             },
             {
                 id: 4,
                 route: `/${userId}/userDashboard/messages/`,
                 title: "Messages",
-                icon: Messages
+                icon: Messages,
+                isDisabled:true
+
             },
             {
                 id: 5,
                 route: `/${userId}/userDashboard/funds/`,
                 title: "Funds",
-                icon: Funds
+                icon: Funds,
+                isDisabled:true
             },
             {
                 id: 6,
                 route: `/${userId}/userDashboard/emergency/`,
                 title: "Emergency",
-                icon: Emergency
+                icon: Emergency,
+                isDisabled:true
+
             },
             {
                 id: 7,
                 route: `/${userId}/userDashboard/blood-bank/`,
                 title: "Blood Bank",
-                icon: BloodBank
+                icon: BloodBank,
+                isDisabled:true
+
             },
             {
                 id: 8,
-                route: `/doctorsahab/medicines/`,
+                route: `/medicines/`,
                 title: "Medicines",
-                icon: Medics
+                icon: Medics,
+                isDisabled:false
             }
 
         ]

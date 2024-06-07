@@ -4,7 +4,6 @@ import Navbar from "components/GlobalComponents/Navbar";
 import Footer from "components/GlobalComponents/Footer";
 import SolutionSteps from "components/HomeComponents/SolutionSteps";
 import Specialities from "components/HomeComponents/Specialities";
-import CovidChart from "components/HomeComponents/CovidChart";
 import styled from "styled-components/dist/styled-components.js";
 import { useEffect } from "react";
 const HomeContainer = styled.div`
@@ -21,7 +20,6 @@ const HomeScreen = () => {
     <HomeContainer>
       <Navbar />
       <HeroSection />
-      <CovidChart />
       <SolutionSteps />
       <Advantages />
       <Specialities />

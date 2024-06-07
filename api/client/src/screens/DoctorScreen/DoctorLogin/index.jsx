@@ -76,10 +76,10 @@ const LoginScreen = () => {
     }
 
     useEffect(() => {
-        // if (doctorLogin.doctorInfo?._id) {
-        //     let id = doctorLogin.doctorInfo._id;
-        //     history.push(`/${id}/doctorDashboard`);
-        // }
+         if (doctorLogin.doctorInfo?._id) {
+             let id = doctorLogin.doctorInfo._id;
+             history.push(`/${id}/doctorDashboard`);
+         }
 
     }, [doctorLogin, history])
 

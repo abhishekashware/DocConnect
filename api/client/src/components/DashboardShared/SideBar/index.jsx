@@ -17,6 +17,7 @@ const StyledNavLink = styled(NavLink)`
     border-left: 7px solid ${"#4DADBD"};
     background: linear-gradient(90deg, rgba(77, 173, 189, 0.16) 0%, rgba(173, 217, 225, 0.08) 52.08%, rgba(173, 217, 225, 0.0733333) 54.17%, rgba(255, 255, 255, 0) 100%);
   }
+  pointer-events: ${(props)=>props.isDisabled?'none':'auto'};
   &.active>div {
     margin-left: 13px;
   }
@@ -59,12 +60,12 @@ function Sidebar({ sidebarData }) {
     <SidebarContainer>
       {
         sidebarData ? sidebarData.map(data => (
-          <StyledNavLink to={data.route} key={data.id} exact>
-            <ImageContainer>
-              <img src={data.icon} alt={data.title} />
-            </ImageContainer>
-            <SPAN>{data.title}</SPAN>
-          </StyledNavLink>
+            <StyledNavLink to={data.route} key={data.id} exact isDisabled={data.isDisabled}>
+              <ImageContainer>
+                <img src={data.icon} alt={data.title} />
+              </ImageContainer>
+              <SPAN>{data.title}</SPAN>
+            </StyledNavLink>
         ))
           : null
       }

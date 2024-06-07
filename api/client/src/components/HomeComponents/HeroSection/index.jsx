@@ -5,7 +5,6 @@ import { fonts } from 'fonts'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import RightHero from 'assets/images/right-hero.svg'
-import CovidDetails from 'components/HomeComponents/CovidDetails'
 import Layout from 'components/GlobalComponents/Layout'
 
 
@@ -16,7 +15,7 @@ const HeroSectionTop = styled.div`
     display: flex;
     justify-content: space-between;
 `
-const HeroSectionBottom = styled.div``
+
 
 const GridLeft = styled.div``
 const GridRight = styled.div``
@@ -94,12 +93,6 @@ const HeroSection = () => {
                         <img src={RightHero} alt={"A man having xray"} />
                     </GridRight>
                 </HeroSectionTop>
-                <HeroSectionBottom>
-                    <CovidTitle>
-                        Current Covid Status In World
-                    </CovidTitle>
-                    <CovidDetails />
-                </HeroSectionBottom>
             </Layout>
         </HeroSectionContainer>
     )

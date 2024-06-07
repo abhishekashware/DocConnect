@@ -23,48 +23,56 @@ const useGetHospitalData = () => {
         route: `/${hospitalId}/hospitalDashboard/`,
         title: "Dashboard",
         icon: Home,
+        isDisabled:false
       },
       {
         id: 2,
         route: `/${hospitalId}/hospitalDashboard/appointments/`,
         title: "Appointments",
         icon: Appointments,
+        isDisabled:false
       },
       {
         id: 3,
         route: `/${hospitalId}/hospitalDashboard/hospitals/`,
         title: "Hospitals",
         icon: Hospital,
+        isDisabled:false
       },
       {
         id: 4,
         route: `/${hospitalId}/hospitalDashboard/messages/`,
         title: "Messages",
         icon: Messages,
+        isDisabled:true
       },
       {
         id: 5,
         route: `/${hospitalId}/hospitalDashboard/funds/`,
         title: "Funds",
         icon: Funds,
+        isDisabled:true
       },
       {
         id: 6,
         route: `/${hospitalId}/hospitalDashboard/emergency/`,
         title: "Emergency",
         icon: Emergency,
+        isDisabled:true
       },
       {
         id: 7,
         route: `/${hospitalId}/hospitalDashboard/blood-bank/`,
         title: "Blood Bank",
         icon: BloodBank,
+        isDisabled:true
       },
       {
         id: 8,
-        route: `/doctorsahab/medicines/`,
+        route: `/medicines/`,
         title: "Medicines",
-        icon: Medics
+        icon: Medics,
+        isDisabled:false
       }
     ],
   };
