@@ -158,33 +158,17 @@ const addDoctors = asyncHandler(async (req, res) => {
   try {
     const hospitals = await Hospitals.findById(req.params.id);
     const {
-      name,
-      exp,
-      spec,
-      contacts,
-      email,
-      date,
-      doctorId,
-      pic,
-      docPassword,
+      email
     } = await req.body;
 
-    if (!name || !doctorId || !contacts || !docPassword) {
+    if (!email) {
       res.status(400);
-      throw new Error("ALL FIELDS REQUIRED");
+      throw new Error("Email is REQUIRED");
     }
-    const newDoctors = new Doctors({
-      name,
-      exp,
-      spec,
-      contacts,
-      email,
-      workingOn: req.params.id,
-      date,
-      pic,
-      docPassword,
-    });
-    await newDoctors.save();
+    const newDoctors = await Doctors.findOne({email});
+    if(!newDoctors){
+      return res.status(400).json({message:"Doctor with this email doesn't exist"});
+    }
     hospitals.doctors.push(newDoctors._id);
     hospitals.save();
     res.status(200).json(newDoctors);

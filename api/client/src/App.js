@@ -8,7 +8,6 @@ import HomeScreen from "screens/HomeScreen";
 import AboutScreen from "screens/AboutScreen";
 import ServiceScreen from "screens/ServiceScreen";
 import DoctorsScreen from "screens/DoctorsScreen";
-import CovidScreen from "screens/CovidScreen";
 import HospitalLogin from "screens/HospitalScreen/HospitalLogin";
 import HospitalRegister from "screens/HospitalScreen/HospitalRegister";
 import LoginOptions from "screens/LoginOptions";
@@ -50,7 +49,6 @@ function App() {
         <Route exact path="/doctor_login" component={DoctorLogin} />
         <Route exact path="/doctor_register" component={DoctorRegister} />
         <Route exact path="/login_options" component={LoginOptions} />
-        <Route exact path="/covid19" component={CovidScreen} />
         <Route exact path="/medicines" component={MedicineScreen} />
         <Route exact path="/cart/:id?" component={CartScreen} />
         <ProtectedRoute

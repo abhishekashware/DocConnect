@@ -83,7 +83,7 @@ const ApprovedAppointments = () => {
             }
         }
     };
-    return (
+    return (approvedList && approvedList.length>0)?(
         <Container>
             <H2>Approved Appointments</H2>
             <table
@@ -163,6 +163,10 @@ const ApprovedAppointments = () => {
                 </tbody>
             </table>
         </Container>
+    ):(
+        <h1>
+            No Approved Appointments Found
+        </h1>
     )
 }
 

@@ -91,7 +91,7 @@ const PendingAppointments = () => {
 
     // }, [])
 
-    return (
+    return         (datas && datas.length>0)?(
         <Container>
             <H2>Pending Appointments</H2>
             <table
@@ -221,6 +221,11 @@ const PendingAppointments = () => {
                 </tbody>
             </table>
         </Container>
+        
+    ):(
+        <h1>
+            No Pending Appointments Found
+        </h1>
     )
 }
 

@@ -9,6 +9,7 @@ import DashboardGeneralInformation from "components/UserDashboard/DashboardGener
 import EventsNearYou from "components/UserDashboard/EventsNearYou";
 import HospitalsNearYou from "components/UserDashboard/HospitalsNearYou";
 import DashboardLayout from 'components/DashboardShared/DashboardLayout';
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 
 
@@ -34,11 +35,10 @@ const FlexLeft = styled.div`
   width: 300px;
 `;
 function Userdashboard() {
-  window.OneSignal = window.OneSignal || [];
-  const OneSignal = window.OneSignal;
-  console.log(OneSignal);
   // fetch data
   const [hospitals, sethospitals] = useState([]);
+  const location=useLocation();
+
   useEffect(() => {
     axios
       .get("/api/hospitals/allHospital")
@@ -57,26 +57,17 @@ function Userdashboard() {
   };
 
   const { userId, userMenuData } = useGetUserData();
+  console.log("ye h" ,location.pathname);
 
-  // let externalId = userId;
-
-  // OneSignal.push(function () {
-  //   OneSignal.isPushNotificationsEnabled(function (isEnabled) {
-  //     if (isEnabled) {
-  //       console.log("Push notifications are enabled!");
-  //       OneSignal.setExternalUserId(userId);
-  //       console.log(OneSignal.getUserId());
-  //     } else {
-  //       console.log("Push notifications are not enabled yet.");
-  //     }
-  //   });
-  // });
   return (
     <DashboardLayout type={"hospital"} menuData={userMenuData}>
-      <Wrapper>
+      <Wrapper>{
+        location.pathname?.includes("userDashboard/hospitals")? '':(
         <Container>
           <DashboardGeneralInformation />
         </Container>
+        )
+}
         <Container>
           <HospitalsNearYou />
         </Container>
