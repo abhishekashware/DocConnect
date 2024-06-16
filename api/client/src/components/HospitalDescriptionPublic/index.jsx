@@ -95,7 +95,7 @@ const HospitalDescriptionPublic = ({ hospitalData }) => {
                 <NameAndRatingContainer>
                     <ProfilePictureContainer>
                         {hospitalData &&
-                            <ProfilePicture src={hospitalData.hospitalImages.length>0?returnURLFromObjectOfStrings(hospitalData.hospitalImages):Hospital} alt={hospitalData.name} />}
+                            <ProfilePicture src={Hospital} alt={hospitalData.name} />}
                     </ProfilePictureContainer>
 
                     <RatingContainer>
