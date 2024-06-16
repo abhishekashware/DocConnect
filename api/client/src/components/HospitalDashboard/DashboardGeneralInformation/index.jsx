@@ -6,6 +6,7 @@ import EditButton from 'assets/images/edit.svg'
 import { fonts } from 'fonts';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import LoadingWrapper from "components/LoadingWrapper";
 
 
 
@@ -70,7 +71,7 @@ const Index = () => {
 
     const [open, setOpen] = useState(false);
 
-    const {hospitalInfo} = useSelector((state) => {
+    const {hospitalInfo,loading} = useSelector((state) => {
         return state.hospitalManipulation;
     });
     console.log(hospitalInfo)
@@ -87,13 +88,18 @@ const Index = () => {
                 <Title>
                     Account
                 </Title>
+                {
+                loading?(''):(
                 <Icons>
                     <IconButton onClick={()=>setOpen(true)}>
                         <img src={EditButton} alt={"Edit Button "} />
                     </IconButton>
                 </Icons>
+                )
+                }
             </CardHeader>
             <Line />
+            <LoadingWrapper loading={loading} data={[hospitalInfo]} emptyMessage={'No Details found'}>
             <CardBody>
                 <CardBodyLeft>
                     <CardItem>
@@ -140,7 +146,7 @@ const Index = () => {
                     </CardItem> */}
                 </CardBodyRight>
             </CardBody>
-
+            </LoadingWrapper>
             <EditProfileForm open={open} setOpen={ setOpen }/>
         </Card>
     )

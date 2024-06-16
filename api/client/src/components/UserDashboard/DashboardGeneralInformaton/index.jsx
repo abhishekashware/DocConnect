@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserProfileAction } from "actions/userActions";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import LoadingWrapper from "components/LoadingWrapper";
 
 
 
@@ -90,13 +91,18 @@ const Index = () => {
                 <Title>
                     Account
                 </Title>
+                {
+                userData.loading?(''):(
                 <Icons>
                     <IconButton onClick={() => setOpen(true)}>
                         <img src={EditButton} alt={"Edit Button "} />
                     </IconButton>
                 </Icons>
+                )
+                }
             </CardHeader>
             <Line />
+            <LoadingWrapper loading={userData.loading} data={[userData]} emptyMessage={'No Details Found'}>
             <CardBody>
                 <CardBodyLeft>
                     <CardItem>
@@ -143,7 +149,7 @@ const Index = () => {
                     </CardItem>
                 </CardBodyRight>
             </CardBody>
-
+            </LoadingWrapper>
             <EditProfileForm open={open} setOpen={setOpen} />
         </Card>
     )
