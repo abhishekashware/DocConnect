@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
-// import AppointmentDetailsButton from "components/AppDetailButton/AppointmentDetailsButton";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import useGetAPI from "hooks/useGetAPI";
+import LoadingWrapper from "components/LoadingWrapper";
 function HospitalAppointments() {
   const asignDate = useRef();
   const asignTime = useRef();
@@ -13,42 +14,11 @@ function HospitalAppointments() {
   const [assignedTime, setAssignedTime] = useState("");
   const [assignedDate, setAssignedDate] = useState("");
   const [assignedToken, setAssignedToken] = useState("");
-  const [approvedList, setApprovedList] = useState([]);
-
-  const [datas, setDatas] = useState([]);
-
   const id = useParams().hospitalId;
   const local = "/api";
+  const {loading,data,error}=useGetAPI(`${local}/userAppointment/${id}/appointment/hospitalallappointments`);
+  const approvedListObj=useGetAPI(`${local}/userAppointment/${id}/approvedList`);
 
-  useEffect(() => {
-    const getAppoiments = async () => {
-      const { data } = await axios.get(
-        `${local}/userAppointment/${id}/appointment/hospitalallappointments`
-      );
-      setDatas(data);
-      const getApprovedList = async () => {
-        const { data } = await axios.get(
-          `${local}/userAppointment/${id}/approvedList`
-        );
-        // console.log(data);
-        setApprovedList(data);
-      };
-      getApprovedList();
-    };
-    getAppoiments();
-  }, [datas, id, approvedList]);
-
-  // useEffect(() => {
-  //   const getApprovedList = async () => {
-  //     const list = await axios.get(
-  //       `${local}/userAppointment/${id}/approvedList`
-  //     );
-  //     setApprovedList(list);
-  //   };
-  //   getApprovedList();
-  // }, [approvedList, id]);
-
-  // console.log(datas);
   const setSchedule = {
     token: assignedToken,
     date: assignedDate,
@@ -56,24 +26,6 @@ function HospitalAppointments() {
     assignedDoc: docAssigned,
     status: { pending: false, done: true, rejected: false },
   };
-  // const handleAppointments = async (res) => {
-  //   let id = res?._id;
-  //   try {
-  //     await axios.put(`${local}/userAppointment/${id}/approved`, setSchedule);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const handleRejectAppointments = async (res) => {
-  //   try {
-  //     await axios.put(`${local}/userAppointment/${res?._id}/rejected`);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // console.log(approvedList);
 
   const uploadReports = async (res) => {
     const id = res?._id;
@@ -109,6 +61,7 @@ function HospitalAppointments() {
         <div className="p-4 flex">
           <h1 className="text-xl">New Appointments List</h1>
         </div>
+        <LoadingWrapper data={data} loading={loading} emptyMessage={'No New Apppointment found'}>
         <div className="px-3 py-1 flex justify-around">
           <table
             className="text-md bg-white shadow-md rounded mb-4"
@@ -183,8 +136,8 @@ function HospitalAppointments() {
                   </button>
                 </td>
               </tr>
-              {datas &&
-                datas.map(
+              {
+                data.map(
                   (res, key) =>
                     res?.status.pending === true &&
                     res?.status.done === false && (
@@ -290,6 +243,7 @@ function HospitalAppointments() {
             </tbody>
           </table>
         </div>
+        </LoadingWrapper>
       </div>
 
       {/* approved appoinment lists are right  belows */}
@@ -297,6 +251,7 @@ function HospitalAppointments() {
         <div className="p-4 flex">
           <h1 className="text-xl">Approved Appointment List</h1>
         </div>
+        <LoadingWrapper loading={approvedListObj.loading} data={approvedListObj.data} emptyMessage={'No Approved Appointments found'}>
         <div className="px-3 py-1 flex justify-around">
           <table
             className="text-md bg-white shadow-md rounded mb-4"
@@ -315,8 +270,8 @@ function HospitalAppointments() {
                 <th className="text-left py-3 px-1 border-2 ">Token No</th>
               </tr>
               {/* rows of data are below now */}
-              {approvedList &&
-                approvedList.map(
+              {
+                approvedListObj.data.map(
                   (res, key) =>
                     res?.status.pending === false &&
                     res?.status.done === true && (
@@ -375,6 +330,7 @@ function HospitalAppointments() {
             </tbody>
           </table>
         </div>
+        </LoadingWrapper>
       </div>
     </div>
   );

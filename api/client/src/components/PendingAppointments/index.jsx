@@ -2,12 +2,13 @@ import { fonts } from 'fonts'
 import React, { useState, useEffect, useRef } from 'react'
 import styled from "styled-components/dist/styled-components.js"
 import COLUMNS from './columns'
-import { useTable } from 'react-table'
 import { useMemo } from 'react'
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 import AppointmentDetailsButton from 'components/AppointmentDetailsButton'
 import Button from 'components/GlobalComponents/Button'
+import useGetAPI from 'hooks/useGetAPI'
+import LoadingWrapper from 'components/LoadingWrapper'
 
 
 const Container = styled.div`
@@ -19,18 +20,6 @@ const H2 = styled.h2`
     font-size: 30px;
     margin-bottom: 20px;
 `
-
-const Table = styled.table`
-`
-const TableHead = styled.thead``
-
-const TableBody = styled.tbody``
-
-const TH = styled.th``
-
-const TableRow = styled.tr``
-
-const TD = styled.td``
 
 
 
@@ -45,12 +34,9 @@ const PendingAppointments = () => {
     const [assignedTime, setAssignedTime] = useState("");
     const [assignedDate, setAssignedDate] = useState("");
     const [assignedToken, setAssignedToken] = useState("");
-    const [approvedList, setApprovedList] = useState([]);
-
-    const [datas, setDatas] = useState([]);
-
     const { id } = useParams();
     const local = "/api";
+    const {loading,data,error}=useGetAPI(`${local}/userAppointment/${id}/appointment/hospitalallappointments`);
 
     const setSchedule = {
         token: assignedToken,
@@ -60,40 +46,11 @@ const PendingAppointments = () => {
         status: { pending: false, done: true, rejected: false },
     };
 
-    useEffect(() => {
-        const getAppoiments = async () => {
-            const { data } = await axios.get(
-                `${local}/userAppointment/${id}/appointment/hospitalallappointments`
-            );
-            setDatas(data);
-            const getApprovedList = async () => {
-                const { data } = await axios.get(
-                    `${local}/userAppointment/${id}/approvedList`
-                );
-                setApprovedList(data);
-            };
-            getApprovedList();
-        };
-        getAppoiments();
-    }, []);
-
     const columns = useMemo(() => COLUMNS, [])
-    // const data = useMemo(() => {
-        
-    //     const getTableDatas = async () => {
-    //         const { data } = await axios.get(
-    //           `/userAppointment/allAppointments`
-    //         );
-    //         return data;
-    //     }
-
-    //     getTableDatas();
-
-    // }, [])
-
-    return         (datas && datas.length>0)?(
+    return       (  
         <Container>
             <H2>Pending Appointments</H2>
+            <LoadingWrapper data={data} loading={loading} emptyMessage={'No Pending Appointments found'}>
             <table
                 className="text-md bg-white shadow-md rounded mb-4"
                 style={{ fontSize: "15px" }}
@@ -111,8 +68,8 @@ const PendingAppointments = () => {
                         <th className="text-left py-3 px-1 border-2 ">Token No</th>
                     </tr>
                     {/* rows of data are below now */}
-                    {datas &&
-                        datas.map(
+                    {
+                        data.map(
                             (res, key) =>
                                 res?.status.pending === true &&
                                 res?.status.done === false && (
@@ -220,12 +177,9 @@ const PendingAppointments = () => {
                         )}
                 </tbody>
             </table>
+            </LoadingWrapper>
         </Container>
         
-    ):(
-        <h1>
-            No Pending Appointments Found
-        </h1>
     )
 }
 
