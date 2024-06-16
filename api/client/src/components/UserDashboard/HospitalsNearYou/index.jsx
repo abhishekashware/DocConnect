@@ -121,7 +121,7 @@ const Index = () => {
                             <ChildCard >
                                 <StyledLink to={`/${params.id}/userDashboard/hospitals/${hospital._id}`} key={hospital._id}>
                                     <ChildCardHeader>
-                                        <ChildCardImage src={hospital.hospitalImages.length?returnURLFromObjectOfStrings(hospital.hospitalImages):Hospital} alt={"Hospital"} />
+                                        <ChildCardImage src={Hospital} alt={"Hospital"} />
                                     </ChildCardHeader>
                                     <ChildCardBody>
                                         <ChildCardTitle>
