@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactLoading from 'react-loading'
-const LoadingWrapper = ({loading,data,children}) => {
+const LoadingWrapper = ({loading,data,children,emptyMessage}) => {
   
   if(loading){
     return (
@@ -10,7 +10,7 @@ const LoadingWrapper = ({loading,data,children}) => {
   return data.length>0?(
     <>{children}</>
   ):(
-    <h1>No Appointments Scheduled</h1>
+    <h1>{emptyMessage}</h1>
   )
 
 }

@@ -1,12 +1,11 @@
 import { fonts } from 'fonts'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import styled from "styled-components/dist/styled-components.js"
-// import COLUMNS from './columns'
-import { useTable } from 'react-table'
-import { useMemo } from 'react'
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 import AppointmentDetailsButton from 'components/AppointmentDetailsButton'
+import useGetAPI from 'hooks/useGetAPI'
+import LoadingWrapper from 'components/LoadingWrapper'
 
 const Container = styled.div``
 
@@ -19,26 +18,8 @@ const H2 = styled.h2`
 const ApprovedAppointments = () => {
     const { id } = useParams();
     const local = "/api";
-
-
-    const asignDate = useRef();
-    const asignTime = useRef();
-    const asignToken = useRef();
-    const asignDoc = useRef();
     const [file, setFile] = useState("");
-    const [docAssigned, setDocAssigned] = useState("");
-    const [assignedTime, setAssignedTime] = useState("");
-    const [assignedDate, setAssignedDate] = useState("");
-    const [assignedToken, setAssignedToken] = useState("");
-    const [approvedList, setApprovedList] = useState([]);
-    const [datas, setDatas] = useState([]);
-    const setSchedule = {
-        token: assignedToken,
-        date: assignedDate,
-        doctime: assignedTime,
-        assignedDoc: docAssigned,
-        status: { pending: false, done: true, rejected: false },
-    };
+    const approvedAppointmentObj=useGetAPI(`${local}/userAppointment/${id}/approvedList`);
     const uploadReports = async (res) => {
         const id = res?._id;
         const formData = new FormData();
@@ -50,40 +31,8 @@ const ApprovedAppointments = () => {
         console.log("reports");
     };
 
-    useEffect(() => {
-        const getAppoiments = async () => {
-            const { data } = await axios.get(
-                `${local}/userAppointment/${id}/appointment/hospitalallappointments`
-            );
-            setDatas(data);
-            const getApprovedList = async () => {
-                const { data } = await axios.get(
-                    `${local}/userAppointment/${id}/approvedList`
-                );
-                setApprovedList(data);
-            };
-            getApprovedList();
-        };
-        getAppoiments();
-    }, []);
-
-    const uploadReport = async () => {
-        const reports = {};
-        if (file) {
-            const data = new FormData();
-            const fileName = Date.now() + file.name;
-            data.append("name", fileName);
-            data.append("file", file);
-            reports.img = fileName;
-            // console.log(newPost);
-            try {
-                await axios.post("/upload", data);
-            } catch (err) {
-                console.log(err);
-            }
-        }
-    };
-    return (approvedList && approvedList.length>0)?(
+    return (
+        <LoadingWrapper loading={approvedAppointmentObj.loading} data={approvedAppointmentObj.data} emptyMessage={'No Appointments Approved'}>
         <Container>
             <H2>Approved Appointments</H2>
             <table
@@ -103,8 +52,7 @@ const ApprovedAppointments = () => {
                         <th className="text-left py-3 px-1 border-2 ">Token No</th>
                     </tr>
                     {/* rows of data are below now */}
-                    {approvedList &&
-                        approvedList.map(
+                    {approvedAppointmentObj.data.map(
                             (res, key) =>
                                 res?.status.pending === false &&
                                 res?.status.done === true && (
@@ -163,10 +111,7 @@ const ApprovedAppointments = () => {
                 </tbody>
             </table>
         </Container>
-    ):(
-        <h1>
-            No Approved Appointments Found
-        </h1>
+        </LoadingWrapper>
     )
 }
 

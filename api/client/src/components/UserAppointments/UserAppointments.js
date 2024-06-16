@@ -13,7 +13,7 @@ function UserAppointments() {
   const {loading,data,error}=useGetAPI(`${local}/userAppointment/${id}/myAppointments`);
 
   return (
-    <LoadingWrapper loading={loading}>
+    <LoadingWrapper loading={loading} data={data} emptyMessage={'No Appointments Scheduled'}>
     <div>
       <table
         class="text-md bg-white shadow-md rounded mb-4"

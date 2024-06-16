@@ -59,8 +59,8 @@ const MedicineScreen = ({history}) => {
                     <Link to="/cart"><Button>Cart</Button></Link>
                 </Nav>
                 <Body>
-                    <LoadingWrapper loading={loading}>
-                    {data ? data.map(medicine => {
+                <LoadingWrapper loading={loading} data={data} emptyMessage={'No Medicines found'}>
+                    {data.map(medicine => {
                         return (
                                 <Card key={medicine._id}>
                                     <img style={{ width: '95%', borderRadius: '12px', margin: 'auto', objectFit: 'cover' }} src={medicine.image} alt="img" />
@@ -69,10 +69,7 @@ const MedicineScreen = ({history}) => {
                                     <Text size="1.5rem">Rs: {medicine.cost}</Text>
                                 </Card>
                         )
-                    }):(
-                        <h1 style={{color:'black'}}>No Medicines Found</h1>
-                    )
-                
+                    })
                 }
                 </LoadingWrapper>
                 </Body>
