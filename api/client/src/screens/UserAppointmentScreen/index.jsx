@@ -26,8 +26,7 @@ const UserAppointment = () => {
     return (
         <DashboardLayout menuData={userMenuData}>
             <DashboardContentWrapper>
-            <LoadingWrapper loading={loading}>
-            {data.length>0?(
+            <LoadingWrapper loading={loading} data={data}>
                 <div>
                     <H2>My Appointments</H2>
                     <table
@@ -101,10 +100,6 @@ const UserAppointment = () => {
                         </tbody>
                     </table>
                 </div>
-                    ):(
-                        <h1>No Appointments Scheduled</h1>
-                    )
-}
 </LoadingWrapper>
             </DashboardContentWrapper>
         </DashboardLayout>
