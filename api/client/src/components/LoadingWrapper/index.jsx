@@ -5,7 +5,7 @@ const LoadingWrapper = ({loading,data,children,emptyMessage}) => {
   if(loading){
     return (
       <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-        <ReactLoading type="spin" color='grey' height='100px' width='100px'/>
+        <ReactLoading type="spin" color='#4DADBD' height='100px' width='100px'/>
         </div>
     )
   }
