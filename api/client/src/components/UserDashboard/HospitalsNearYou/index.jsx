@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-
+import Hospital from '../../../assets/images/dashboarsIcons/hospital.svg';
 import Card from 'components/DashboardShared/CardLayout'
 import { fonts } from 'fonts'
 import styled from "styled-components/dist/styled-components.js"
@@ -121,7 +121,7 @@ const Index = () => {
                             <ChildCard >
                                 <StyledLink to={`/${params.id}/userDashboard/hospitals/${hospital._id}`} key={hospital._id}>
                                     <ChildCardHeader>
-                                        <ChildCardImage src={returnURLFromObjectOfStrings(hospital.hospitalImages)} alt={"Hospital"} />
+                                        <ChildCardImage src={hospital.hospitalImages.length?returnURLFromObjectOfStrings(hospital.hospitalImages):Hospital} alt={"Hospital"} />
                                     </ChildCardHeader>
                                     <ChildCardBody>
                                         <ChildCardTitle>
