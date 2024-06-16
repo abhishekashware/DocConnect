@@ -65,7 +65,7 @@ const ChildCardTitle = styled.h4`
 
 const ChildCardImage = styled.img`
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     height: 200px;
 `
 
