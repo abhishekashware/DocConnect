@@ -8,7 +8,7 @@ const LoadingWrapper = ({loading,data,children}) => {
     )
   }
   return data.length>0?(
-    {children}
+    <>{children}</>
   ):(
     <h1>No Appointments Scheduled</h1>
   )
