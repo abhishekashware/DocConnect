@@ -7,6 +7,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import styled from "styled-components/dist/styled-components.js"
 import { fonts } from 'fonts';
+import useGetAPI from 'hooks/useGetAPI';
+import LoadingWrapper from 'components/LoadingWrapper';
 
 
 const H2 = styled.h2`
@@ -18,22 +20,14 @@ const H2 = styled.h2`
 const UserAppointment = () => {
 
     const local = "/api";
-    const [appointmentList, setAppointmentList] = useState([]);
-    const [setHosId, setSetHosId] = useState();
     const id = useParams().id;
-    console.log(id);
-    useEffect(() => {
-        axios.get(`${local}/userAppointment/${id}/myAppointments`).then((data) => {
-            setAppointmentList(data.data);
-            console.log(data.data)
-            //   setSetHosId(data.withHospital);
-        });
-    }, [id]);
+    const {loading,data,error}=useGetAPI(`${local}/userAppointment/${id}/myAppointments`);
     const { userMenuData } = useGetUserData()
     return (
         <DashboardLayout menuData={userMenuData}>
             <DashboardContentWrapper>
-            {appointmentList.length>0?(
+            <LoadingWrapper loading={loading}>
+            {data.length>0?(
                 <div>
                     <H2>My Appointments</H2>
                     <table
@@ -53,7 +47,7 @@ const UserAppointment = () => {
                                 <th class="text-left py-3 px-1 border-2 ">Token No</th>
                             </tr>
                             {/* rows of data are below now */}
-                            {appointmentList.map((res, index) => (
+                            {data.map((res, index) => (
                                 <tr
                                     class="border-b hover:bg-orange-100 bg-gray-100"
                                     style={{ fontSize: "13px" }}
@@ -111,6 +105,7 @@ const UserAppointment = () => {
                         <h1>No Appointments Scheduled</h1>
                     )
 }
+</LoadingWrapper>
             </DashboardContentWrapper>
         </DashboardLayout>
     )

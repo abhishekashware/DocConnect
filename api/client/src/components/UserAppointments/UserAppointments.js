@@ -3,25 +3,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import useGetAPI from "hooks/useGetAPI";
+import LoadingWrapper from "components/LoadingWrapper";
 function UserAppointments() {
   const userLogin = useSelector((state) => state.userLogin);
   console.log(userLogin);
   const local = "/api";
-  const [appointmentList, setAppointmentList] = useState([]);
-  const [setHosId, setSetHosId] = useState();
   const id = useParams().id;
-  useEffect(() => {
-    axios.get(`${local}/userAppointment/${id}/myAppointments`).then((data) => {
-      setAppointmentList(data.data);
-      console.log(data);
-      console.log("hello datas");
-      //   setSetHosId(data.withHospital);
-    });
-  }, [id]);
+  const {loading,data,error}=useGetAPI(`${local}/userAppointment/${id}/myAppointments`);
 
   return (
+    <LoadingWrapper loading={loading}>
     <div>
-
       <table
         class="text-md bg-white shadow-md rounded mb-4"
         style={{ fontSize: "15px" }}
@@ -39,7 +32,7 @@ function UserAppointments() {
             <th class="text-left py-3 px-1 border-2 ">Token No</th>
           </tr>
           {/* rows of data are below now */}
-          {appointmentList.map((res) => (
+          {data.map((res) => (
             <tr
               class="border-b hover:bg-orange-100 bg-gray-100"
               style={{ fontSize: "13px" }}
@@ -85,7 +78,7 @@ function UserAppointments() {
                   }}
                   class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                 >
-                  Reject
+                  Cancel
                 </button>
               </td>
             </tr>
@@ -93,6 +86,7 @@ function UserAppointments() {
         </tbody>
       </table>
     </div>
+    </LoadingWrapper>
   );
 }
 

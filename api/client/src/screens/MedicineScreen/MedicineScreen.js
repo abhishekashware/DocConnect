@@ -5,9 +5,11 @@ import Button from 'components/GlobalComponents/Button/index'
 
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import useGetAPI from 'hooks/useGetAPI'
+import LoadingWrapper from 'components/LoadingWrapper'
 
 const MedicineScreen = ({history}) => {
-    const [medicines, setmedicines] = useState([])
+    const {loading,data,error}=useGetAPI('/api/medic/allmedicine');
 
     const Container = styled.div`
         width: 100%;
@@ -46,15 +48,6 @@ const MedicineScreen = ({history}) => {
     const Text = styled.div`
         font-size: ${props => props.size || '0.7rem'};
     `
-    useEffect(() => {
-        async function fetchData() {
-            console.log('hi')
-            const res = await axios.get('/api/medic/allmedicine')
-            console.log(res.data)
-            setmedicines(res.data)
-        }
-        fetchData()
-    }, [])
     const addToCart=(id)=>{
         history.push(`/cart/${id}?`)
     }
@@ -66,7 +59,8 @@ const MedicineScreen = ({history}) => {
                     <Link to="/cart"><Button>Cart</Button></Link>
                 </Nav>
                 <Body>
-                    {medicines ? medicines.map(medicine => {
+                    <LoadingWrapper loading={loading}>
+                    {data ? data.map(medicine => {
                         return (
                                 <Card key={medicine._id}>
                                     <img style={{ width: '95%', borderRadius: '12px', margin: 'auto', objectFit: 'cover' }} src={medicine.image} alt="img" />
@@ -80,6 +74,7 @@ const MedicineScreen = ({history}) => {
                     )
                 
                 }
+                </LoadingWrapper>
                 </Body>
             </Container>
         </>
