@@ -124,7 +124,7 @@ function Navbar({ type }) {
               </ProfilePictureContainer>
               <UserDetails>
                 <ProfileName>
-                  {responseObject?.name ? responseObject?.name : "Ayush Mainali"}
+                  {responseObject?.name ? responseObject?.name : "Abhishek Ashware"}
                 </ProfileName>
                 <AngleDownImage src={AngleDown} alt={"Angle Down "} />
               </UserDetails>

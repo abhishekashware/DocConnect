@@ -77,15 +77,6 @@ const Index = () => {
   const { hospitalInfo } = useSelector((state) => {
     return state.hospitalManipulation;
   });
-// <<<<<<< ayush
-
-// =======
-//   const [hosInf, setHosInf] = useState([]);
-//   useEffect(() => {
-//     setHosInf(hospitalInfo.events);
-//   }, [hosInf, hospitalInfo.events]);
-// >>>>>>> master
-  //   console.log(hospitalInfo);
   return (
     <Card>
       <CardHeader>
