@@ -7,6 +7,8 @@ import styled from "styled-components/dist/styled-components.js"
 import axios from 'axios'
 import returnURLFromObjectOfStrings from 'utils/returnURLFromObjectOfStrings'
 import truncate from 'truncate'
+import LoadingWrapper from 'components/LoadingWrapper';
+import useGetAPI from 'hooks/useGetAPI';
 
 const Title = styled.div`
     font-size: 28px;
@@ -80,30 +82,8 @@ const StyledLink = styled(Link)`
 
 const Index = () => {
 
-
-    const [loading, setLoading] = useState(false)
-    const [hospitals, setHospitals] = useState([]);
-    const [error, setError] = useState("")
     const params = useParams();
-
-    useEffect(() => {
-        const getAllHospitals = async () => {
-            setLoading(true);
-            try {
-                const hospitalDatas = await axios("/api/hospitals/allHospital");
-                setLoading(false)
-                console.log(hospitalDatas.data)
-                setHospitals([...hospitalDatas.data]);
-            }
-            catch (error) {
-                setLoading(false)
-                setError(error)
-            }
-
-        }
-
-        getAllHospitals();
-    }, [])
+    const {loading,data,error}=useGetAPI("/api/hospitals/allHospital");
 
     return (
         <Card>
@@ -115,9 +95,9 @@ const Index = () => {
             <Line />
             <CardBody>
                 <ChildCardContainer>
-                    {loading && <div>Loading...</div>}
-                    {hospitals.length ? (
-                        hospitals.map(hospital => (
+                    <LoadingWrapper loading={loading} data={data} emptyMessage={error?.message}> 
+                    { 
+                        data.map(hospital => (
                             <ChildCard >
                                 <StyledLink to={`/${params.id}/userDashboard/hospitals/${hospital._id}`} key={hospital._id}>
                                     <ChildCardHeader>
@@ -134,8 +114,8 @@ const Index = () => {
                                 </StyledLink>
                             </ChildCard>
                         ))
-                    ) : null}
-                    {error && <div>{error.message}</div>}
+                    }
+                    </LoadingWrapper>
                 </ChildCardContainer>
             </CardBody>
         </Card>

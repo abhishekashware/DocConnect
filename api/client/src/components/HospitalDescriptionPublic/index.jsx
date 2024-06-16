@@ -6,6 +6,7 @@ import StarRatings from 'react-star-ratings';
 import Card from 'components/DashboardShared/CardLayout'
 import returnURLFromObjectOfStrings from 'utils/returnURLFromObjectOfStrings';
 import AppointmentForm from 'components/AppointmentForm'
+import Hospital from '../../assets/images/dashboarsIcons/hospital.svg';
 
 const Line = styled.div`
     margin: 30px 0;
@@ -94,7 +95,7 @@ const HospitalDescriptionPublic = ({ hospitalData }) => {
                 <NameAndRatingContainer>
                     <ProfilePictureContainer>
                         {hospitalData &&
-                            <ProfilePicture src={returnURLFromObjectOfStrings(hospitalData.hospitalImages)} alt={hospitalData.name} />}
+                            <ProfilePicture src={hospitalData.hospitalImages.length>0?returnURLFromObjectOfStrings(hospitalData.hospitalImages):Hospital} alt={hospitalData.name} />}
                     </ProfilePictureContainer>
 
                     <RatingContainer>
