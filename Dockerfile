@@ -12,4 +12,4 @@ FROM openjdk:17
 COPY --from=build /target/doc-connect doc-connect.jar
 # ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","demo.jar"]
+ENTRYPOINT ["java","-jar","doc-connect.jar"]
