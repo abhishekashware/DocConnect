@@ -1,6 +1,7 @@
 package com.abhishek.hospital_management_system.service;
 
 import com.abhishek.hospital_management_system.dto.HospitalRegisterRequest;
+import com.abhishek.hospital_management_system.modal.Doctor;
 import com.abhishek.hospital_management_system.modal.Hospital;
 import com.abhishek.hospital_management_system.dto.HospitalLoginRequest;
 import com.abhishek.hospital_management_system.repository.HospitalRepository;
@@ -52,5 +53,10 @@ public class HospitalService {
             hospitalRepository.save(hospitalUpdateRequest);
         }
         return hospital;
+    }
+
+    public List<Doctor> getDoctorsByHospitalId(ObjectId id) {
+        Optional<Hospital> hospital=hospitalRepository.findById(id);
+        return hospital.map(Hospital::getDoctors).orElse(null);
     }
 }

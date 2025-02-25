@@ -1,6 +1,7 @@
 package com.abhishek.hospital_management_system.controller;
 
 import com.abhishek.hospital_management_system.dto.HospitalRegisterRequest;
+import com.abhishek.hospital_management_system.modal.Doctor;
 import com.abhishek.hospital_management_system.modal.Hospital;
 import com.abhishek.hospital_management_system.dto.HospitalLoginRequest;
 import com.abhishek.hospital_management_system.service.HospitalService;
@@ -42,6 +43,11 @@ public class HospitalController {
     @PostMapping("/{id}/updateHospital")
     public Optional<Hospital> updateHospital(@RequestBody Hospital hospitalUpdateRequest,@PathVariable("id") ObjectId id){
         return hospitalService.updateHospital(hospitalUpdateRequest,id);
+    }
+
+    @GetMapping("/{id}/allDoctors")
+    public List<Doctor> getDoctorsByHospitalId(@PathVariable("id") ObjectId id){
+        return hospitalService.getDoctorsByHospitalId(id);
     }
 
 }

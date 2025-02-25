@@ -1,12 +1,10 @@
 package com.abhishek.hospital_management_system.modal;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -30,14 +28,15 @@ public class Hospital {
     private String hospitalProfilePics;
     private String hospitalDescription;
     @DBRef
+    @JsonManagedReference
     private List<Doctor> doctors;
     private List<EmergencyContact> emergencyContacts;
     private int ambulance;
     private BedCapacity beds;
     private BedType bedType;
     private List<Vacancy> vacancy;
-    @JsonBackReference
     @DBRef
+    @JsonManagedReference
     private List<Appointment> appointments;
     @DBRef
     private List<Review> reviews;

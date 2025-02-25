@@ -1,14 +1,11 @@
 package com.abhishek.hospital_management_system.modal;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -33,8 +30,8 @@ public class Appointment {
     @DBRef
     private Doctor assignedDoctor;
     private Date followUp;
-    @JsonManagedReference
     @DBRef
+    @JsonBackReference
     private Hospital withHospital;
     @DBRef
     private User patient;
